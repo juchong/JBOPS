@@ -102,7 +102,11 @@ def hex_to_int(value):
 
 def arg_decoding(arg):
     """Decode args, encode UTF-8"""
-    return arg.decode(TAUTULLI_ENCODING).encode('UTF-8')
+    try:
+        arg.decode(TAUTULLI_ENCODING).encode('UTF-8')
+        return arg.decode(TAUTULLI_ENCODING).encode('UTF-8')
+    except AttributeError:
+        return arg
 
 
 def debug_dump_vars():
@@ -154,7 +158,7 @@ def rich_notify(notifier_id, rich_type, color=None, kill_type=None, server_name=
     Parameters
     ----------
     notifier_id : int
-        The ID of the user to grab sessions for.
+T        The ID of the user to grab sessions for.
     rich_type : str
         Contains 'discord' or 'slack'.
     color : Union[int, str]
